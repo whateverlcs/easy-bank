@@ -91,7 +91,7 @@ cd easy-bank
 4. Envie as suas alterações: `git push origin my-feature`
 > Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](https://github.com/firstcontributions/first-contributions)
 
-# 🤵 Autor
+# 🤵 👨‍🎤 Autores
 
 Lucas Batistão e Ramon Kowalski
 
