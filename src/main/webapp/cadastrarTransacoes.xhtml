@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/xhtml/template.xhtml">
+		
+		<ui:define name="tituloSistema"><a href="#"><span>Cadastramento de </span>Transações</a></ui:define>
+		<ui:define name="tituloPagina">Cadastro de Transações</ui:define>
+		<ui:define name="tituloPrincipal">Cadastro de Transações</ui:define>
+		<ui:define name="tituloSecundario">Cadastre as transações</ui:define>
+		
+		<ui:define name="botoesAcao">
+				<p:commandButton value="Efetuar Transação financeira" action="#{transacaoBean.cadastrar()}" update="@form"/>
+				<p:linkButton outcome="listarTransacoes" value="Listar transações" />
+		</ui:define>
+		
+		<ui:define name="conteudo">
+		
+			<h:panelGrid columns="3" style="margin-bottom: 15px;">
+				
+				<p:outputLabel for="n0" value="Cartão de crédito:" />
+				<p:inputMask id="n0" value="#{transacaoBean.transacao.cartaoCredito.numero}" mask="9999-9999-9999-9999"/>
+				<p:message for="n0" />
+				
+				<p:outputLabel for="n1" value="Código de Segurança (CVV):" />
+				<p:inputMask id="n1" value="#{transacaoBean.transacao.cartaoCredito.cvv}" mask="999" />
+				<p:message for="n1" />
+				
+				<p:outputLabel for="n2" value="Valor (R$):" />
+				<p:inputNumber id="n2" value="#{transacaoBean.transacao.valor}" decimalPlaces="2" decimalSeparator="," thousandSeparator="." />
+				<p:message for="n2"/>
+				
+				<p:outputLabel for="n3" value="Tipo de Operação" />
+				<p:selectOneMenu id="n3" value="#{transacaoBean.transacao.tipoTransacao}">
+					<f:selectItem itemLabel="--selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="Crédito" itemValue="Crédito"/>
+					<f:selectItem itemLabel="Débito" itemValue="Débito"/>
+				</p:selectOneMenu>
+				<p:message for="n3"/>
+				
+				<p:outputLabel for="n4" value="Agente Financeiro:" />
+				<p:inputText id="n4" value="#{transacaoBean.transacao.credor}" />
+				<p:message for="n4"/>
+			
+			</h:panelGrid>
+		
+		</ui:define>
+		
+	</ui:composition>
+</html>

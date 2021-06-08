@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/xhtml/template.xhtml">
+		
+		<ui:define name="tituloSistema"><a href="#"><span>Relatório de </span>Transações</a></ui:define>
+		<ui:define name="tituloPagina">Relatório de Transações</ui:define>
+		<ui:define name="tituloPrincipal">Relatório de Transações</ui:define>
+		<ui:define name="tituloSecundario">Relatório de transações</ui:define>
+		
+		<ui:define name="conteudo">
+			<p:outputLabel for="n1" value="Cartão de crédito:" />
+			<p:inputMask id="n1" value="#{transacaoBean.numero}" mask="9999-9999-9999-9999" />
+			<p:commandButton value="Pesquisar transações financeiras" action="#{transacaoBean.pesquisar()}" update="tbTransacoes"/>
+			<br/>
+			<br/>
+			<p:dataTable id="tbTransacoes" value="#{transacaoBean.transacoes}" var="transacao" emptyMessage="Nenhuma transação com esse número!">
+		
+			<p:column headerText="Cliente">
+				<h:outputText value="#{transacao.cartaoCredito.cliente.nome}" />
+			</p:column>
+			
+			<p:column headerText="Data e hora da transação">
+				<h:outputText value="#{transacao.dataTransacao}" />
+			</p:column>
+			
+			<p:column headerText="Tipo da Transação">
+				<h:outputText value="#{transacao.tipoTransacao}" />
+			</p:column>
+			
+			<p:column headerText="Valor (R$)">
+				<h:outputText value="#{transacao.valor}" />
+			</p:column>
+			
+			<p:column headerText="Saldo (R$)">
+				<h:outputText value="#{transacao.saldoHist}" />
+			</p:column>
+			
+		</p:dataTable>
+		
+		</ui:define>
+		
+		<ui:define name="botoesAcao">
+			<p:linkButton outcome="gerarGraficos" value="Gráficos das Transações" />
+		</ui:define>
+		
+	</ui:composition>
+</html>

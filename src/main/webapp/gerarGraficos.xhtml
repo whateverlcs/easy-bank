@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/xhtml/template.xhtml">
+		
+		<ui:define name="tituloSistema"><a href="#"><span>Gráficos de </span>Transações</a></ui:define>
+		<ui:define name="tituloPagina">Gráficos de Transações</ui:define>
+		<ui:define name="tituloPrincipal">Gráficos de Transações</ui:define>
+		<ui:define name="tituloSecundario">Gráficos de transações</ui:define>
+		
+		<ui:define name="conteudo">
+			<br/>	
+			<p:panel style="colour:#gray">
+		        <p:tabView>
+		        	<p:tab title="Por cliente">
+		                <p:outputLabel for="n0" value="Nome do cliente:"/>
+						<p:inputText id="n0" value="#{chartJSView.nome}" style="margin-left:10px" />
+						<p:commandButton value="Gerar" action="#{chartJSView.createLineModel2()}" update="lineChart1" style="margin-left:10px"/>
+						<br/><br/>
+						<p:lineChart id="lineChart1" model="#{chartJSView.lineModel}" style="width: 100% height: 500px"/>
+		            </p:tab>
+		            <p:tab title="Por cartão">
+		                <p:outputLabel for="n1" value="Número do cartão:"/>
+						<p:inputMask id="n1" mask="9999-9999-9999-9999" value="#{chartJSView.numcar}" style="margin-left:10px"/>
+						<p:commandButton value="Gerar" action="#{chartJSView.createLineModel()}" update="lineChart" style="margin-left:10px"/>
+						<br/><br/>
+						<p:lineChart id="lineChart" model="#{chartJSView.lineModel}" style="width: 100% height: 500px"/>
+		            </p:tab>
+		            <p:tab title="Por agente">
+		                <p:outputLabel for="n2" value="Credor:"/>
+						<p:inputText id="n2" value="#{chartJSView.credor}" style="margin-left:10px" />
+						<p:commandButton value="Gerar" action="#{chartJSView.createLineModel3()}" update="lineChart2" style="margin-left:10px"/>
+						<br/><br/>
+						<p:lineChart id="lineChart2" model="#{chartJSView.lineModel}" style="width: 100% height: 500px"/>
+		            </p:tab>
+		        </p:tabView>
+        	</p:panel>
+		</ui:define>
+		
+	</ui:composition>
+</html>

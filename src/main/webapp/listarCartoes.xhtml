@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/xhtml/template.xhtml">
+		
+		<ui:define name="tituloSistema"><a href="#"><span>Listagem de </span>Cartões de Crédito</a></ui:define>
+		<ui:define name="tituloPagina">Listagem de Cartões de Crédito</ui:define>
+		<ui:define name="tituloPrincipal">Listagem de Cartões de Crédito</ui:define>
+		<ui:define name="tituloSecundario">Listagem os cartões de crédito</ui:define>
+		
+		<ui:define name="conteudo">
+		
+			<p:dataTable id="tbCartoes" value="#{cartaoBean.cartoes}" var="cartao" emptyMessage="Nenhum cartão cadastrado!">
+		
+			<p:column headerText="Número">
+				<h:outputText value="#{cartao.numero}" />
+			</p:column>
+			
+			<p:column headerText="Saldo">
+				<h:outputText value="#{cartao.saldo}" />
+			</p:column>
+			
+			<p:column headerText="Data de Criação">
+				<h:outputText value="#{cartao.dataCriacao}" />
+			</p:column>
+			
+			<p:column headerText="Data de validade">
+				<h:outputText value="#{cartao.dataValidade}" />
+			</p:column>
+			
+			<p:column headerText="Cliente" filterBy="#{cartao.cliente.nome}">
+				<h:outputText value="#{cartao.cliente.nome}" />
+			</p:column>
+			
+		</p:dataTable>
+		
+		</ui:define>
+		
+	</ui:composition>
+</html>

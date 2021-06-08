@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/xhtml/template.xhtml">
+		
+		<ui:define name="tituloSistema"><a href="#"><span>Cadastramento de </span>Cartões de Crédito</a></ui:define>
+		<ui:define name="tituloPagina">Cadastro de Cartões de Crédito</ui:define>
+		<ui:define name="tituloPrincipal">Cadastro de Cartões de Crédito</ui:define>
+		<ui:define name="tituloSecundario">Cadastre os cartões de crédito</ui:define>
+		
+		<ui:define name="botoesAcao">
+				<p:commandButton rendered="#{clienteBean.cliente.id eq null}" value="Gerar cartão de crédito" action="#{cartaoBean.cadastrar()}" update="@form show"/>
+				<p:linkButton outcome="listarCartoes" value="Listar cartões" />
+		</ui:define>
+		
+		<ui:define name="conteudo">
+		
+			<h:panelGrid columns="3" style="margin-bottom: 15px;">
+				
+				<p:outputLabel for="n0" value="Cliente" />
+				<p:selectOneMenu id="n0" value="#{cartaoBean.cartaoCredito.cliente}" converter="omnifaces.SelectItemsConverter">
+					<f:selectItem noSelectionOption="true" itemLabel="--Selecione"/>
+					<f:selectItems value="#{clienteBean.clientes}" var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}"/>
+				</p:selectOneMenu>
+				<p:message for="n0"/>
+
+				<p:outputLabel for="n1" value="Crédito Inicial (R$):" />
+				<p:inputNumber id="n1" value="#{cartaoBean.cartaoCredito.saldo}" decimalPlaces="2" decimalSeparator="," thousandSeparator="." />
+				<p:message for="n1"/>
+			
+			</h:panelGrid>
+			
+			<h:panelGrid columns="3" style="margin-bottom: 15px;" id="show" rendered="#{cartaoBean.cartaoShow.id ne null}">
+				
+				<p:outputLabel for="n2" value="Número:" />
+				<h:outputText id="n2" value="#{cartaoBean.cartaoShow.numero}" />
+				<p:message for="n2"/>
+
+				<p:outputLabel for="n3" value="CVV:" />
+				<h:outputText id="n3" value="#{cartaoBean.cartaoShow.cvv}" />
+				<p:message for="n3"/>
+				
+				<p:outputLabel for="n4" value="Data de validade:" />
+				<h:outputText id="n4" value="#{cartaoBean.cartaoShow.dataValidade}">
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
+				</h:outputText>
+				<p:message for="n4"/>
+			
+			</h:panelGrid>
+		
+		</ui:define>
+		
+	</ui:composition>
+</html>

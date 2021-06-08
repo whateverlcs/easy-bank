@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/xhtml/template.xhtml">
+		
+		<ui:define name="tituloSistema"><a href="#"><span>Listagem de </span>Clientes</a></ui:define>
+		<ui:define name="tituloPagina">Listagem de Clientes</ui:define>
+		<ui:define name="tituloPrincipal">Listagem de Clientes</ui:define>
+		<ui:define name="tituloSecundario">Listagem os clientes</ui:define>
+		
+		<ui:define name="conteudo">
+		
+			<p:dataTable id="tbClientes" value="#{clienteBean.clientes}" var="cliente" emptyMessage="Nenhum cliente cadastrado!">
+		
+			<p:column headerText="Nome">
+				<h:outputText value="#{cliente.nome}" />
+			</p:column>
+			
+			<p:column headerText="Email">
+				<h:outputText value="#{cliente.email}" />
+			</p:column>
+			
+			<p:column headerText="Data de Nascimento">
+				<h:outputText value="#{cliente.dataNascimento}" />
+			</p:column>
+			
+			<p:column headerText="CPF">
+				<h:outputText value="#{cliente.cpf}" />
+			</p:column>
+			
+			<p:column headerText="Telefone">
+				<h:outputText value="#{cliente.telefone}" />
+			</p:column>
+			
+			<p:column headerText="Renda Média">
+				<h:outputText value="#{cliente.rendaMedia}" />
+			</p:column>
+			
+			<p:column headerText="Ações">
+				<p:commandButton value="X" action="#{clienteBean.excluir(cliente)}" update="@form" immediate="true">
+					<p:confirm header="Confirmação" message="Tem certeza que deseja excluir o cliente #{cliente.nome}?" icon="pi pi-exclamation-triangle" />
+				</p:commandButton>
+				
+			</p:column>
+			
+		</p:dataTable>
+		
+		</ui:define>
+		
+	</ui:composition>
+</html>
